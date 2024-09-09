@@ -43,16 +43,20 @@ def pairwise_distances(x):
 
 
 def calculate_gram_mat(x, sigma):
+    # sigma
     dist= pairwise_distances(x)
     #dist = dist/torch.max(dist)
     return torch.exp(-dist /sigma)
 
 
-def renyi_entropy(x,sigma):
+def renyi_entropy(x, alpha, sigma):
     """
     Function for computing matrix entropy.
     """
-    alpha = 5
+    # alpha common: 1.01; 2; 5
+    alpha = 5  # as default
+    alpha = 1.01
+    alpha = 2
     k = calculate_gram_mat(x,sigma)
     k = k/torch.trace(k)
     eigv = torch.abs(torch.symeig(k, eigenvectors=True)[0])
@@ -61,11 +65,14 @@ def renyi_entropy(x,sigma):
     return entropy
 
 
-def joint_entropy(x,y,s_x,s_y):
+def joint_entropy(x,y,s_x,s_y, alpha):
     """
     Function for computing joint matrix entropy.
     """
-    alpha = 5
+    # alpha keep same with alpha of renyi_entropy
+    # alpha = 5  # as default
+    # alpha = 1.01
+    # alpha = 2
     x = calculate_gram_mat(x,s_x)
     y = calculate_gram_mat(y,s_y)
     k = torch.mul(x,y)
@@ -77,13 +84,13 @@ def joint_entropy(x,y,s_x,s_y):
     return entropy
 
 
-def calculate_MI(x,y,s_x,s_y):
+def calculate_MI(x,y,s_x,s_y,alpha):
     """
     Function for computing mutual information using matrix entropy
     """
-    Hx = renyi_entropy(x,sigma=s_x)
-    Hy = renyi_entropy(y,sigma=s_y)
-    Hxy = joint_entropy(x,y,s_x,s_y)
+    Hx = renyi_entropy(x,alpha,sigma=s_x)
+    Hy = renyi_entropy(y,alpha,sigma=s_y)
+    Hxy = joint_entropy(x,y,s_x,s_y,alpha)
     Ixy = Hx+Hy-Hxy
     #normlize = Ixy/(torch.max(Hx,Hy))
     
@@ -102,13 +109,14 @@ def train(args, model, train_dataset, optimizer, epoch, SG_model, device, criter
     miloss_accum = 0
     # train_subgraph = copy.deepcopy(train_dataset)
     total_time = 0
+    alpha = args.alpha
     for pos in pbar:
         indices = range(0, len(train_dataset), args.batch_size)
         
         for i in indices:
             model.train()
             SG_model.train()
-            graphs = train_dataset[i : i + args.batch_size]
+            graphs = train_dataset[i: i + args.batch_size]
             batch_graph = next(iter(DataLoader(graphs, batch_size=len(graphs))))
 
             embeddings, original_output = model(batch_graph)
@@ -141,7 +149,7 @@ def train(args, model, train_dataset, optimizer, epoch, SG_model, device, criter
                 sigma2 = np.mean(np.sort(k[:, :10], 1))
 
 
-            mi_loss = calculate_MI(embeddings, positive, sigma1**2, sigma2**2) / len(graphs)
+            mi_loss = calculate_MI(embeddings, positive, sigma1**2, sigma2**2, alpha) / len(graphs)
             labels = batch_graph.y.view(-1,).to(device)
 
             regularization_loss = 0

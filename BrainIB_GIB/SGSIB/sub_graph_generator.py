@@ -66,7 +66,9 @@ class MLP_subgraph(nn.Module):
         f12self = torch.cat([f1, f2], dim=-1)
         f12self = F.sigmoid(self.linear2(F.sigmoid(self.linear1(f12self))))
         # mask_sigmoid = f12self.reshape(116, 116)
-        mask_sigmoid = f12self.reshape(self.num_nodes, self.num_nodes)
+        # mask_sigmoid = f12self.reshape(self.num_nodes, self.node_features_num)
+        mask_sigmoid = f12self.reshape(x.shape[0], self.node_features_num)
+
 
         sym_mask = (mask_sigmoid + mask_sigmoid.transpose(0, 1)) / 2
         edgemask = sym_mask[graph.edge_index[0], graph.edge_index[1]]

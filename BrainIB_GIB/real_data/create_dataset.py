@@ -4,6 +4,7 @@ from scipy.sparse import coo_matrix
 from scipy.io import loadmat
 import torch
 from torch_geometric.data import Data
+import pandas as pd
 
 
 def read_dataset():
@@ -71,6 +72,7 @@ def read_test_dataset(num_graphs):
     return dataset
 
 
+# This is for BSNIP dataset
 def read_Schi_dataset():
     PATH = os.getcwd()
     BSNIP = loadmat(PATH + '/BSNIP.mat')
@@ -100,12 +102,45 @@ def read_Schi_dataset():
     return dataset
 
 
+    # Read UCLA Dataset
+def read_UCLA_dataset():
+    PATH = os.getcwd()
+    UCLA = loadmat(PATH + '/UCLA.mat')
+    dataset = []
+    data = UCLA['UCLA']
+    labels = data['y'][0][0]
+    num = len(data['y'][0][0])
+
+    for i in range(num):
+        label = labels[i][0][0].item()
+        y = torch.Tensor([label])
+
+        ROI = torch.Tensor(data['FC'][0][0][i][0])
+        edge = torch.Tensor(data['edges'][0][0][i][0])
+        adj = torch.Tensor(data['adj'][0][0][i][0])
+
+        A = torch.sparse_coo_tensor(indices=edge[:, :2].t().long(), values=edge[:, -1].reshape(-1, ).float(),
+                                        size=(105, 105))
+        G = (A.t() + A).coalesce()
+
+        graph = Data(x=ROI.reshape(-1, 105).float(), edge_index=G.indices().reshape(2, -1).long(),
+                         edge_attr=G.values().reshape(-1, 1).float(),
+                         # edge_weak_connet=edge_weak_connet, edge_weight=edge_weight,
+                         y=y.long())
+        dataset.append(graph)
+    print("finish read UCLA dataset")
+    return dataset
 
 if __name__ == '__main__':
     # here is some test code, for the dataset reader loader
     # sample_data = read_test_dataset(1)
-    dataset = read_Schi_dataset()
-    print(len(dataset))
+    # dataset = read_Schi_dataset()
+    # print(len(dataset))
+    read_UCLA_dataset()
+
+
+
+
 
 
 

@@ -12,7 +12,7 @@ from SGSIB.sub_node_generator import GIB
 from SGSIB.sub_graph_generator import MLP_subgraph
 from SGSIB.utils import train, test, separate_data
 from real_data.create_dataset import read_Schi_dataset, read_dataset, read_UCLA_dataset
-from synthetic_data.synthetic_main import create_syn_dataset_1
+# from synthetic_data.synthetic_main import create_syn_dataset_1
 from baseline_data.baseline_main import get_baseline_data
 os.environ["WANDB_AGENT_DISABLE_FLAPPING"] = "true"
 

@@ -1,10 +1,12 @@
 import pandas as pd
 import numpy as np
+import os
 
 def do_the_map():
+    PATH = os.getcwd()
     # Load the data from the Excel file
-    BrainNet_index_map_path = '/Users/hutianzheng/Desktop/Brain_IB/Visualization_and_data/statistic_data/BSNIP/BrainNet_index_map.xlsx'
-    BSNIP_new_id = '/Users/hutianzheng/Desktop/Brain_IB/Visualization_and_data/GroupICA/BSNIP_new_id.xlsx'
+    BrainNet_index_map_path = PATH + '/BrainNet_index_map.xlsx'
+    BSNIP_new_id = PATH + '/BSNIP_new_id.xlsx'
 
 
     # Read the sheets into dataframes
@@ -64,7 +66,7 @@ def do_the_map():
     # Create a DataFrame from the results
     results_df = pd.DataFrame(save_most_map_node)
     # Save the results to an Excel file
-    output_file_path = '/Users/hutianzheng/Desktop/Brain_IB/Visualization_and_data/GroupICA/closest_map_points.xlsx'
+    output_file_path = PATH + '/closest_map_points.xlsx'
     results_df.to_excel(output_file_path, index=False)
 
     # Print the results (optional)
@@ -80,7 +82,8 @@ def do_the_map():
 
 
 def mapping_list_to_AAl_116(target_list):
-    map_file_path = "/Users/hutianzheng/Desktop/Brain_IB/DATA/BSNIP/ICNs_v2.xlsx"
+    PATH = os.getcwd()
+    map_file_path = PATH + "/ICNs_v2.xlsx"
     id_map = pd.read_excel(map_file_path, sheet_name='Sheet1')
     filtered_df = id_map[id_map['id in model'].isin(target_list)]
     # Get corresponding Category B values
@@ -98,4 +101,4 @@ def mapping_list_to_AAl_116(target_list):
 target_list = [101, 94, 100, 92, 95, 102, 96, 97, 101, 98, 97, 97, 92, 6, 97, 85, 85, 7, 86, 102]
 sorted_combinations, index_list, name_list = mapping_list_to_AAl_116(target_list)
 
-print(index_list)
+print(sorted_combinations, index_list, name_list)

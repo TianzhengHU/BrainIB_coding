@@ -74,8 +74,9 @@ BrainIB_GIB
 ├── Graph_network_main.py
 ├── SGSIB_main.py
 ├── Traditional_main.py
-├── README.md
-└── Visualization.py
+├── Visualization.py
+├── requirements.txt
+└── README.md
 
 ```
 

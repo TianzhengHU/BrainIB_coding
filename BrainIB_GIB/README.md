@@ -1,4 +1,4 @@
-# BrainIB+
+<img width="384" alt="image" src="https://github.com/user-attachments/assets/c6a6ce6b-e91c-4e18-99c0-3fe4fc8c4598"># BrainIB+
 
 ## Interpretable Diagnosis of Schizophrenia Using Graph-Based Brain Network Information Bottleneck
 
@@ -7,13 +7,28 @@ This is the BrianIB+ demo for the BSNIP and UCLA dataset, BrianIB+ is also known
 This README.md is for all readers.
  
 ### Contents
+- [Overall Methods](#getting-started)
+  - [Data Preprocessing](#data-preprocessing)
+  - [The Architecture of model](#the-architecture-of-model)
+- [Implementation](#implementation)
+- [Results](#results)
+- [Interpretable analysis](#interpretable-analysis)
 - [Getting Started](#getting-started)
   - [Configuration requirements](#configuration-requirements)
   - [Step by step](#step-by-step)
 - [File Directory Description](#file-directory-description)
 
+### Overall Methods
 
+#### Data Preprocessing
 
+#### The Architecture of model
+
+### Implementation
+
+### Results
+
+### Interpretable analysis
 
 ### Getting Started
 
@@ -79,13 +94,3 @@ BrainIB_GIB
 └── README.md
 
 ```
-
-
-
-
-
-
-
-
-how to run 
-run Python file "SGSIB_main.py" to start our demo.

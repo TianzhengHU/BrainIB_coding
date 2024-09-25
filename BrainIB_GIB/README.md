@@ -1,4 +1,4 @@
-<img width="384" alt="image" src="https://github.com/user-attachments/assets/c6a6ce6b-e91c-4e18-99c0-3fe4fc8c4598"># BrainIB+
+# BrainIB+
 
 ## Interpretable Diagnosis of Schizophrenia Using Graph-Based Brain Network Information Bottleneck
 

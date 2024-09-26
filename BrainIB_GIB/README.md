@@ -214,7 +214,7 @@ git clone git@github.com:TianzhengHU/BrainIB_coding.git
 The datasets used in this project are public avaliable. To facilitate testing, we make the preprocessed dataset publicly available on Google drive.
 Please download dataset files: **UCLA.mat** and **BSNIP.mat** from link:
 ```
- https://drive.google.com/drive/folders/1ca9-nxsldpN3Cam_bGX6odce1VlOt96J?usp=share_link).
+ https://drive.google.com/drive/folders/1ca9-nxsldpN3Cam_bGX6odce1VlOt96J?usp=share_link
 ```
 Put them under the "real_data" folder.
 

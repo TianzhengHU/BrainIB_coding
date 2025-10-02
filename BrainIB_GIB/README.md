@@ -24,7 +24,7 @@ This README.md is for all readers.
  In this study, two datasets are used: the public dataset acquired from UCLA Consortium for Neuropsychiatric Phenomics(UCLA)(https://exhibits.stanford.edu/data/catalog/mg599hw5271), and
  the dataset from the Tri-Institutional Georgia State University/Georgia Institute of Technology/Emory University Center for Translational Research in Neuroimaging and Data Science (TReNDS)\footnote(https://trendscenter.org/data/), US (BSNIP)(https://github.com/TianzhengHU/BrainIB_node). 
 
-**![](data_preprocessing.png)**
+**![](datapreprocessing-data_preprocessing.png)**
 
 **Figure 1 data preprocessing** 
 The resting-state fMRI raw data are preprocessed and then parcellated into regions of interest (ROIs) according to the Group ICA atlas and the map to the automated anatomical labeling (AAL) atlas. The functional connectivity (FC) matrices are calculated using Pearson correlation between ROIs. From the FC we construct the brain functional graph G = {A, X}, where A is the graph adjacency matrix characterizing the graph structure and X is the node feature matrix. Specifically, A is a binarized FC matrix, where only the top 20-percentile absolute values of the correlations of the matrix are transformed into ones, while the rest are transformed into zeros.  For node feature $X$, $X_{k}$ for node $k$ can be defined as $X_{k}=\left [ \rho_{k1},\dots, \rho_{kn}\right ] ^{\text{T}}$ , where $\rho_{kl}$ is the Pearson’s correlation coefficient for node $k$ and node $l$. Note that, we only consider functional connectivity values as node features, which is common in brain network analysis [4]. Finally, the functional graph is fed to BrainIB for psychiatric classification.
@@ -82,49 +82,89 @@ Minimizing $-I (G_{sub}, Y)$ encourages $G_{sub}$ is most predictable to graph l
 ### Results
 
 <table border="1">
-  <caption>TABLE I: Experiment performance of all baseline models and BrainIB+ model on the single-site datasets, which means training and testing on the same dataset.</caption>
+  <caption>TABLE I: Experiment performance of all baseline models and BrainIB++ model on the single- cohort datasets, which means training and testing on the same dataset. </caption>
   <thead>
     <tr>
-      <th rowspan="2">Single-site DATASET</th>
+      <th rowspan="2">Single-cohort</th>
       <th colspan="5">Traditional Model</th>
-      <th colspan="5">Graph Model</th>
     </tr>
     <tr>
       <th>SVM</th>
-      <th>SVM-E</th>
-      <th>Decision Tree</th>
       <th>KNN</th>
+      <th>Decision Tree</th>
       <th>AdaBoost</th>
-      <th>GIN</th>
-      <th>GAT</th>
-      <th>BrainIB</th>
-      <th>BrainIB+</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>BSNIP</td>
-      <td>0.715</td>
       <td>0.611</td>
-      <td>0.568</td>
       <td>0.651</td>
+      <td>0.568</td>
       <td>0.625</td>
-      <td>0.704</td>
-      <td>0.696</td>
-      <td>0.722</td>
-      <td>0.748</td>
     </tr>
     <tr>
       <td>UCLA</td>
+      <td>0.667</td>
+      <td>0.664</td>
+      <td>0.607</td>
       <td>0.727</td>
-      <td>0.667</td>
-      <td>0.515</td>
-      <td>0.545</td>
-      <td>0.667</td>
-      <td>0.706</td>
-      <td>0.765</td>
-      <td>0.765</td>
-      <td>0.765</td>
+    </tr>
+    <tr>
+      <td>COBRE</td>
+      <td>0.750</td>
+      <td>0.731</td>
+      <td>0.712</td>
+      <td>0.625</td>
+    </tr>
+  </tbody>
+</table>
+
+<br/>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th rowspan="2">Single-cohort</th>
+      <th colspan="4">Graph Model</th>
+      <th colspan="2">Graph IB Model</th>
+    </tr>
+    <tr>
+      <th>GCN</th>
+      <th>GIN</th>
+      <th>GAT</th>
+      <th>Graph Transformer</th>
+      <th>BrainIB</th>
+      <th>BrainIB++</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>BSNIP</td>
+      <td>0.743</td>
+      <td>0.733</td>
+      <td>0.725</td>
+      <td>0.711</td>
+      <td>0.722</td>
+      <td><b>0.748</b></td>
+    </tr>
+    <tr>
+      <td>UCLA</td>
+      <td>0.737</td>
+      <td>0.769</td>
+      <td>0.762</td>
+      <td>0.771</td>
+      <td>0.770</td>
+      <td><b>0.783</b></td>
+    </tr>
+    <tr>
+      <td>COBRE</td>
+      <td>0.759</td>
+      <td>0.773</td>
+      <td>0.761</td>
+      <td>0.823</td>
+      <td>0.833</td>
+      <td><b>0.847</b></td>
     </tr>
   </tbody>
 </table>
@@ -132,53 +172,76 @@ Minimizing $-I (G_{sub}, Y)$ encourages $G_{sub}$ is most predictable to graph l
 <br>
 
 <table border="1">
-  <caption>TABLE II: Experiment performance of all baseline models and BrainIB+ model on a multi-site dataset. SVM-E performs best when training on the BSNIP datasetand testing on the UCLA dataset when BrainIB+ performs best when training on UCLA and testing on the BSNIP dataset.</caption>
-  <thead>
+  <caption>TABLE II: Experiment performance of all baseline models and BrainIB++ model on the multi-cohort datasets, which  means training and testing on different datasets. </caption>
+ <thead>
     <tr>
-      <th rowspan="2">Multi-site DATASET</th>
-      <th colspan="5">Traditional Model</th>
-      <th colspan="5">Graph Model</th>
+      <th rowspan="2">Multi-cohort</th>
+      <th colspan="4">Traditional Model</th>
     </tr>
     <tr>
       <th>SVM</th>
-      <th>SVM-E</th>
-      <th>Decision Tree</th>
       <th>KNN</th>
+      <th>Decision Tree</th>
       <th>AdaBoost</th>
-      <th>GIN</th>
-      <th>GAT</th>
-      <th>BrainIB</th>
-      <th>BrainIB+</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>BSNIP to UCLA</td>
-      <td>0.576</td>
+      <td>BSNIP → UCLA</td>
       <td>0.697</td>
-      <td>0.424</td>
       <td>0.667</td>
+      <td>0.424</td>
       <td>0.455</td>
-      <td>0.588</td>
-      <td>0.412</td>
-      <td>0.585</td>
-      <td>0.689</td>
     </tr>
     <tr>
-      <td>UCLA to BSNIP</td>
-      <td>0.489</td>
-      <td>0.537</td>
-      <td>0.463</td>
-      <td>0.445</td>
-      <td>0.459</td>
-      <td>0.487</td>
-      <td>0.478</td>
-      <td>0.443</td>
-      <td>0.548</td>
+      <td>BSNIP → COBRE</td>
+      <td>0.250</td>
+      <td>0.673</td>
+      <td>0.610</td>
+      <td>0.438</td>
     </tr>
   </tbody>
 </table>
 
+<br/>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th rowspan="2">Multi-cohort</th>
+      <th colspan="4">Graph Model</th>
+      <th colspan="2">Graph IB Model</th>
+    </tr>
+    <tr>
+      <th>GCN</th>
+      <th>GIN</th>
+      <th>GAT</th>
+      <th>Graph Transformer</th>
+      <th>BrainIB</th>
+      <th>BrainIB++</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>BSNIP → UCLA</td>
+      <td>0.565</td>
+      <td>0.571</td>
+      <td>0.594</td>
+      <td>0.568</td>
+      <td>0.693</td>
+      <td><b>0.709</b></td>
+    </tr>
+    <tr>
+      <td>BSNIP → COBRE</td>
+      <td>0.584</td>
+      <td>0.632</td>
+      <td>0.621</td>
+      <td>0.646</td>
+      <td>0.667</td>
+      <td><b>0.681</b></td>
+    </tr>
+  </tbody>
+</table>
 
 
 ### Interpretable analysis

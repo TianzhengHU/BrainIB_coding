@@ -248,11 +248,19 @@ Minimizing $-I (G_{sub}, Y)$ encourages $G_{sub}$ is most predictable to graph l
 
 <p align="center">
   <figure>
-    <img src="multi-site_BrainIB+.png" alt="Image 2" width="700"/>
+    <img src="visualresult_SVM.png" alt="Image 2" width="700"/>
   </figure>
 </p>
 
-**Figure 5 interpretable analysis result** BrainIB+ model demonstrated node preferences across datasets from both BSNIP and UCLA datasets during multi-site training(BSNIP to UCLA). The nodes with top probabilities were selected by the well-trained BrainIB+'s Subgraph Generator on the BSNIP dataset and the UCLA dataset individually. The 5 common nodes including Supp\_Motor\_Area\_L, Calcarine\_R, Occipital\_Inf\_R, Fusiform\_R, Postcentral\_R are the top five brain regions.
+**Figure 5 interpretable analysis result** SVM training on the single-cohort dataset and multi-cohort dataset, result in 30\% and 35\% overlap cross dataset respectively. The overlap of BSNIP and UCLA is focused on Amygdala\_R, Calcarine\_L, Calcarine\_R, Postcentral\_L, Postcentral\_R, and Caudate\_R. The overlap brain regions of multi-cohort training includes Frontal\_Inf\_Oper\_R, Supp\_Motor\_Area\_L, Paracentral\_Lobule\_R, Caudate\_L) and Caudate\_R,  Calcarine\_L, Calcarine\_R
+
+<p align="center">
+  <figure>
+    <img src="visualresult_BrainIB++.png" alt="Image 2" width="700"/>
+  </figure>
+</p>
+
+**Figure 6 interpretable analysis result** The BrainIB++ model demonstrated 40\% overlap in distinct node preferences across both the BSNIP and UCLA datasets during multi-cohort training. Fig.(a) and Fig.(b) illustrate the nodes with the highest probabilities selected by the well-trained BrainIB++ subgraph generator for the BSNIP dataset and the UCLA dataset, respectively. Fig.(c) displays the five common nodes identified in both (a) and (b), including Supp\_Motor\_Area\_L, Calcarine\_R, Occipital\_Inf\_R, Fusiform\_R, Postcentral\_R. Supp\_Motor\_Area\_L and Calcarine\_R appeared more than once  within the overlapping nodes.
 
 ### Getting Started
 

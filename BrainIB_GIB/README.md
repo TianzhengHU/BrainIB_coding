@@ -1,8 +1,10 @@
-# BrainIB+
+# BrainIB++
 
-## Interpretable Diagnosis of Schizophrenia Using Graph-Based Brain Network Information Bottleneck
+## Leveraging Graph Neural Networks and Information Bottleneck for Functional Brain Biomarkers in Schizophrenia
 
-This is the BrianIB+ demo for the BSNIP and UCLA dataset, BrianIB+ is also known as BrainIB V2.
+This is the BrianIB++ demo for the BSNIP, UCLA and COBRE dataset, BrianIB++ is also known as BrainIB V2.
+This work has been accepted by Biomedical Signal Processing and Control. 
+Arkiv: https://www.arxiv.org/abs/2510.03004
 
 This README.md is for all readers.
  

@@ -273,7 +273,9 @@ Please ensure that the device has a working environment。
 1. Activate your environment
 2. Install packages
 ```sh
-pip install -r requirements.txt
+pip install torch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0
+pip install torch-scatter==2.1.1 torch-sparse==0.6.12 torch-geometric==2.0.3
+pip install -r requirements.txt --no-deps
 ```
 
 #### **Step by step**

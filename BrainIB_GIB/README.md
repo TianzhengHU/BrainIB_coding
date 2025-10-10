@@ -266,7 +266,7 @@ Minimizing $-I (G_{sub}, Y)$ encourages $G_{sub}$ is most predictable to graph l
 
 ### Getting Started
 
-Please ensure that the device has a working environment。
+Please ensure that the device has a working environment (python 3.8.10)。
 
 #### Configuration requirements
 

@@ -23,7 +23,7 @@ This README.md is for all readers.
 ### Overall Methods
 
 #### Data Preprocessing
- In this study, two datasets are used: the public dataset acquired from UCLA Consortium for Neuropsychiatric Phenomics(UCLA)(https://exhibits.stanford.edu/data/catalog/mg599hw5271), and
+ In this study, three datasets are used: the public dataset acquired from UCLA Consortium for Neuropsychiatric Phenomics(UCLA)(https://exhibits.stanford.edu/data/catalog/mg599hw5271), COBRE(https://openneuro.org/datasets/ds001461/versions/1.0.3) and
  the dataset from the Tri-Institutional Georgia State University/Georgia Institute of Technology/Emory University Center for Translational Research in Neuroimaging and Data Science (TReNDS)\footnote(https://trendscenter.org/data/), US (BSNIP)(https://github.com/TianzhengHU/BrainIB_node). 
 
 **![](datapreprocessing-data_preprocessing.png)**
